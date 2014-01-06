@@ -39,7 +39,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (void) commonInit {
     _animationDuration  = kAPLSlideMenuDefaultAnimationDuration;
     _menuWidth          = kAPLSlideMenuDefaultMenuWidth;
-    _gestureSupport     = APLSlideMenuGestureSupportBasic;
+    self.gestureSupport = APLSlideMenuGestureSupportBasic;
     
     _keyboardVisible    = NO;
     _bouncing           = NO;
@@ -193,6 +193,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     }
 }
 
+- (void)setGestureSupport:(APLSlideMenuGestureSupportType)gestureSupport {
+    _gestureSupport = gestureSupport;
+    self.dragGestureRecognizer.enabled = gestureSupport != APLSlideMenuGestureSupportNone;
+}
 
 #pragma mark - Menu view
 
@@ -293,7 +297,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 #pragma mark - MenuHandling
 
 - (void) dragGestureRecognizerDrag:(UIPanGestureRecognizer*)sender {
-    if (self.keyboardVisible || self.gestureSupport == APLSlideMenuGestureSupportNone || self.isDisplayMenuSideBySide)
+    if (self.keyboardVisible || self.isDisplayMenuSideBySide)
         return;
     
     CGPoint translation = [sender translationInView:self.view];
