@@ -11,7 +11,7 @@ Sliding Hamburger Menu like the one in the Facebook App
 ## Installation
 Install via cocoapods by adding this to your Podfile:
 
-	pod "APLSlideMenu", "~> 0.0.8"
+	pod "APLSlideMenu", "~> 0.0.9"
 
 ## Usage
 Import header file:

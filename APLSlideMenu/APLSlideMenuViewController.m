@@ -100,8 +100,11 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     // Correct shadow size
     UIView *currentView = self.contentViewController.view;
     currentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:currentView.bounds].CGPath;
-    
-    [self displayMenuSideBySideIfNeededForOrientation:[UIApplication sharedApplication].statusBarOrientation];
+
+    if (!self.presentedViewController) {
+        [self displayMenuSideBySideIfNeededForOrientation:[UIApplication sharedApplication].statusBarOrientation];
+    }
+
 }
 
 #pragma mark - Interface rotation
