@@ -130,7 +130,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (void)displayMenuSideBySideIfNeededForOrientation:(UIInterfaceOrientation)orientation {
     BOOL displayMenuSideBySide = self.isShowMenuInLandscape && (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && UIInterfaceOrientationIsLandscape(orientation);
     
-    CGFloat offsetX = displayMenuSideBySide? [self menuAbsoluteWidth] : 0.;
+    CGFloat offsetX = displayMenuSideBySide ? [self menuAbsoluteWidth] : 0.;
     CGRect frame = self.contentContainerView.frame;
     frame.origin.x = offsetX;
     frame.size.width = self.view.bounds.size.width - offsetX;
