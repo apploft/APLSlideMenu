@@ -1,11 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "APLSlideMenu"
-  s.version      = "0.0.9"
+  s.version      = "0.1.0"
   s.summary      = "Sliding Hamburger Menu like the one in the Facebook App"
 
   s.description  = <<-DESC
                    Sliding Hamburger Menu like the one in the Facebook App
 
+                   * supports left and right slide menus
                    * supports optional swipe gesture support
                    * supports device orientations
                    * supports optional permanent display of slidemenu in landscape on iPad like an UISplitViewController

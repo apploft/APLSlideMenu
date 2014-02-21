@@ -25,6 +25,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 @property (nonatomic, assign, getter = isMenuViewVisible) BOOL menuViewVisible;
 @property (nonatomic, assign) UIView *contentContainerView;
 @property (nonatomic, assign, getter = isDisplayMenuSideBySide) BOOL displayMenuSideBySide;
+@property (nonatomic, strong, readwrite) UIViewController *activeMenuViewController;
 
 @end
 
@@ -130,7 +131,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (void)displayMenuSideBySideIfNeededForOrientation:(UIInterfaceOrientation)orientation {
     BOOL displayMenuSideBySide = self.isShowMenuInLandscape && (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && UIInterfaceOrientationIsLandscape(orientation);
     
-    CGFloat offsetX = displayMenuSideBySide ? [self menuAbsoluteWidth] : 0.;
+    CGFloat offsetX = displayMenuSideBySide? [self menuAbsoluteWidth] : 0.;
     CGRect frame = self.contentContainerView.frame;
     frame.origin.x = offsetX;
     frame.size.width = self.view.bounds.size.width - offsetX;
@@ -143,7 +144,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 #pragma mark - status bar style
 
 - (UIViewController*)childViewControllerForStatusBarStyle {
-    return self.isMenuViewVisible ? self.menuViewController : self.contentViewController;
+    return self.isMenuViewVisible ? self.activeMenuViewController : self.contentViewController;
 }
 
 #pragma mark - Properties
@@ -173,19 +174,43 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     [self setContentViewController:contentViewController animated:NO];
 }
 
-- (void)setMenuViewController:(UIViewController *)menuViewController {
+- (void)setLeftMenuViewController:(UIViewController *)menuViewController {
     
-    if (_menuViewController) {
-        [_menuViewController willMoveToParentViewController:nil];
-        [_menuViewController.view removeFromSuperview];
-        [_menuViewController removeFromParentViewController];
+    if (_leftMenuViewController) {
+        [_leftMenuViewController willMoveToParentViewController:nil];
+        [_leftMenuViewController.view removeFromSuperview];
+        [_leftMenuViewController removeFromParentViewController];
     }
     
-    _menuViewController = menuViewController;
+    _leftMenuViewController = menuViewController;
     if (menuViewController) {
         UIView *menuView    = menuViewController.view;
         CGRect menuFrame = self.view.bounds;
         menuFrame.size.width = self.menuWidth + kAPLSlideMenuFirstOffset;
+        
+        menuView.frame = menuFrame;
+        
+        [self addChildViewController:menuViewController];
+        [self.view insertSubview:menuView atIndex:0];
+        
+        [menuViewController didMoveToParentViewController:self];
+    }
+}
+
+- (void)setRightMenuViewController:(UIViewController *)menuViewController {
+    
+    if (_rightMenuViewController) {
+        [_rightMenuViewController willMoveToParentViewController:nil];
+        [_rightMenuViewController.view removeFromSuperview];
+        [_rightMenuViewController removeFromParentViewController];
+    }
+    
+    _rightMenuViewController = menuViewController;
+    if (menuViewController) {
+        UIView *menuView    = menuViewController.view;
+        CGRect menuFrame = self.view.bounds;
+        menuFrame.size.width = self.menuWidth + kAPLSlideMenuFirstOffset;
+        menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
         
         menuView.frame = menuFrame;
         
@@ -290,9 +315,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 -(void)addShadowToView:(UIView*)aView {
     aView.clipsToBounds = NO;
     aView.layer.shadowPath = [UIBezierPath bezierPathWithRect:aView.bounds].CGPath;
-    aView.layer.shadowRadius = 5;
-    aView.layer.shadowOpacity = 0.5;
-    aView.layer.shadowOffset = CGSizeMake(-5, 0);
+    aView.layer.shadowRadius = 10;
+    aView.layer.shadowOpacity = 0.75;
+    aView.layer.shadowOffset = CGSizeMake(0., 0.);
     aView.layer.shadowColor = [UIColor blackColor].CGColor;
 }
 
@@ -322,13 +347,14 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
                 CGFloat newStartX  = self.dragContentStartX;
                 newStartX += xTranslation;
                 
-                CGFloat endX       = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
+                CGFloat endX = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
                 
-                if (newStartX < 0.0) 
-                    newStartX = 0.0;
-                else if (newStartX > endX)
-                    newStartX = endX;
-                
+                newStartX = MIN(MAX(self.rightMenuViewController ? -endX : 0., newStartX), self.leftMenuViewController ? endX : 0.);
+                if (newStartX < 0) {
+                    [self.view sendSubviewToBack:self.leftMenuViewController.view];
+                } else {
+                    [self.view sendSubviewToBack:self.rightMenuViewController.view];
+                }
                 
                 contentFrame.origin.x = newStartX;                
                 aView.frame = contentFrame;
@@ -337,32 +363,49 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         }
         case UIGestureRecognizerStateEnded: {            
             if (self.gestureSupport == APLSlideMenuGestureSupportBasic) {
-                if (xTranslation > 0.0) 
-                    [self showMenu:YES];
-                else if (xTranslation < 0.0) 
-                    [self hideMenu:YES];
-                
-            }
-            else if (self.gestureSupport == APLSlideMenuGestureSupportDrag) {
-                if (flickVelocitiy<[sender velocityInView:self.contentContainerView].x) {
-                    if (xTranslation > 0.0) {
-                        [self showMenu:YES];
-                    } else if (xTranslation <0) {
+                if (xTranslation > 0.0) {
+                    if (self.leftMenuViewController && !self.isMenuViewVisible) {
+                        [self showLeftMenu:YES];
+                    } else {
+                        [self hideMenu:YES];
+                    }
+                } else if (xTranslation < 0.0) {
+                    if (self.rightMenuViewController && !self.isMenuViewVisible) {
+                        [self showRightMenu:YES];
+                    } else {
                         [self hideMenu:YES];
                     }
                 }
-                else {
-                    UIView *aView = self.contentContainerView;
-                    CGRect contentFrame = [aView frame];                    
-                    CGFloat currentX    = contentFrame.origin.x;
-                    CGFloat endX        = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
+            } else if (self.gestureSupport == APLSlideMenuGestureSupportDrag) {
+                UIView *aView = self.contentContainerView;
+                CGRect contentFrame = [aView frame];
+                CGFloat currentX    = contentFrame.origin.x;
+                
+                if (((0. < currentX) && (flickVelocitiy < [sender velocityInView:self.contentContainerView].x)) ||
+                    ((currentX < 0.) && ([sender velocityInView:self.contentContainerView].x < -flickVelocitiy))) {
+                    if (xTranslation > 0.0) {
+                        if (self.leftMenuViewController && !self.isMenuViewVisible) {
+                            [self showLeftMenu:YES];
+                        } else {
+                            [self hideMenu:YES];
+                        }
+                    } else if (xTranslation < 0.0) {
+                        if (self.rightMenuViewController && !self.isMenuViewVisible) {
+                            [self showRightMenu:YES];
+                        } else {
+                            [self hideMenu:YES];
+                        }
+                    }
+                } else {
+                    CGFloat endX = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
                     
-                    
-                    if (currentX < endX) 
+                    if (self.rightMenuViewController && !self.isMenuViewVisible && (currentX < -endX)) {
+                        [self showRightMenu:YES];
+                    } else if (self.leftMenuViewController && !self.isMenuViewVisible && (endX < currentX)) {
+                        [self showLeftMenu:YES];
+                    } else {
                         [self hideMenu:YES];
-                    else 
-                        [self showMenu:YES];
-                    
+                    }
                 }
             }
             // Reset drag content start x
@@ -392,11 +435,24 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
      [[NSNotificationCenter defaultCenter] postNotificationName:APLSlideMenuDidHideNotification object:self];
 }
 
-- (void)showMenu:(BOOL)animated {
+- (void)showLeftMenu:(BOOL)animated {
+    [self.view sendSubviewToBack:self.rightMenuViewController.view];
+    [self showMenu:self.leftMenuViewController animated:animated];
+}
+
+- (void)showRightMenu:(BOOL)animated {
+    [self.view sendSubviewToBack:self.leftMenuViewController.view];
+    [self showMenu:self.rightMenuViewController animated:animated];
+}
+
+- (void)showMenu:(UIViewController*)viewController animated:(BOOL)animated {
     if (self.isDisplayMenuSideBySide) return;
+    
+    CGFloat direction = (viewController == self.leftMenuViewController) ? 1. : -1.;
     
     void(^showMenuCompletionBlock)(BOOL) = ^(BOOL finished) {
         self.menuViewVisible = YES;
+        self.activeMenuViewController = viewController;
         if (self.tapOnContentViewToHideMenu) {
             [self.contentContainerView addGestureRecognizer:self.hideTapGestureRecognizer];
             self.contentViewController.view.userInteractionEnabled = NO;
@@ -409,9 +465,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     
     void(^showBouncingBlock)() = ^{
         __block CGRect contentFrame = [self.contentContainerView frame];
-        __block CGFloat endx = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
+        __block CGFloat endx = direction * ((self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth);
         
-        contentFrame.origin.x = endx + kAPLSlideMenuFirstOffset;
+        contentFrame.origin.x = endx + direction * kAPLSlideMenuFirstOffset;
         
         [UIView animateWithDuration:kAPLSlideMenuDefaultBounceDuration
                               delay:0.0
@@ -433,7 +489,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     
     void(^showMenuBlock)() = ^{
         CGRect contentFrame = [self.contentContainerView frame];
-        contentFrame.origin.x = (self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth;
+        contentFrame.origin.x = direction * ((self.menuWidth >= 0.0 && self.menuWidth <= 1.0) ? roundf(self.menuWidth*contentFrame.size.width) : self.menuWidth);
         self.contentContainerView.frame = contentFrame;
     };
     
@@ -456,6 +512,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 - (void)hideMenu:(BOOL)animated {
     if (self.isDisplayMenuSideBySide) return;
+    
+    CGFloat direction = (self.activeMenuViewController == self.leftMenuViewController) ? 1. : -1.;
         
     void (^hideMenuCompletionBlock)(BOOL) = ^(BOOL finished) {
         self.menuViewVisible = NO;
@@ -473,7 +531,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     void(^hideBouncingBlock)() = ^{
         __block CGRect contentFrame = [self.contentContainerView frame];
         
-        contentFrame.origin.x = -kAPLSlideMenuFirstOffset;
+        contentFrame.origin.x = -1. * direction * kAPLSlideMenuFirstOffset;
         [UIView animateWithDuration:kAPLSlideMenuDefaultBounceDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut
@@ -515,11 +573,19 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     }
 }
 
--(void) switchMenu:(BOOL) animated {
+-(void) switchLeftMenu:(BOOL) animated {
     if (self.isMenuViewVisible) {
         [self hideMenu:animated];
     } else {
-        [self showMenu:animated];
+        [self showLeftMenu:animated];
+    }
+}
+
+-(void) switchRightMenu:(BOOL) animated {
+    if (self.isMenuViewVisible) {
+        [self hideMenu:animated];
+    } else {
+        [self showRightMenu:animated];
     }
 }
 

@@ -37,7 +37,8 @@ extern NSString *APLSlideMenuDidHideNotification;
 @end
 
 @interface APLSlideMenuViewController : UIViewController
-@property (nonatomic, strong) IBOutlet UIViewController *menuViewController;
+@property (nonatomic, strong) IBOutlet UIViewController *leftMenuViewController;
+@property (nonatomic, strong) IBOutlet UIViewController *rightMenuViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *contentViewController;
 
 /** Listen to show and hide events. */
@@ -70,10 +71,12 @@ extern NSString *APLSlideMenuDidHideNotification;
 /** Readonly getter. */
 - (BOOL) isMenuViewVisible;
 
-- (void) showMenu:(BOOL)animated;
+- (void) showLeftMenu:(BOOL)animated;
+- (void) showRightMenu:(BOOL)animated;
 - (void) hideMenu:(BOOL)animated;
 
-- (void) switchMenu:(BOOL) animated;
+- (void) switchLeftMenu:(BOOL) animated;
+- (void) switchRightMenu:(BOOL) animated;
 
 - (void) dismissContentViewController;
 @end
