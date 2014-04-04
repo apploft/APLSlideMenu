@@ -17,6 +17,7 @@
 		B3FCC42C183A1C79005BF9D9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FCC42A183A1C79005BF9D9 /* MainStoryboard.storyboard */; };
 		B3FCC434183A2480005BF9D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3FCC432183A2480005BF9D9 /* InfoPlist.strings */; };
 		B3FCC441183A2509005BF9D9 /* APLSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */; };
+		B6A281FE18EEB2B200926904 /* APLSlideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */; };
 		DD88AE3116809C51000412E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3016809C51000412E1 /* UIKit.framework */; };
 		DD88AE3316809C51000412E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3216809C51000412E1 /* Foundation.framework */; };
 		DD88AE3516809C51000412E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3416809C51000412E1 /* CoreGraphics.framework */; };
@@ -40,6 +41,8 @@
 		B3FCC433183A2480005BF9D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = APLSlideMenuDemo/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		B3FCC43F183A2509005BF9D9 /* APLSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSlideMenuViewController.h; sourceTree = "<group>"; };
 		B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSlideMenuViewController.m; sourceTree = "<group>"; };
+		B6A281FC18EEB2B200926904 /* APLSlideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSlideMenuSegue.h; sourceTree = "<group>"; };
+		B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSlideMenuSegue.m; sourceTree = "<group>"; };
 		DD88AE2D16809C51000412E1 /* APLSlideMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APLSlideMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD88AE3016809C51000412E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DD88AE3216809C51000412E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,6 +70,8 @@
 			children = (
 				B3FCC43F183A2509005BF9D9 /* APLSlideMenuViewController.h */,
 				B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */,
+				B6A281FC18EEB2B200926904 /* APLSlideMenuSegue.h */,
+				B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */,
 			);
 			name = APLSlideMenu;
 			path = ../APLSlideMenu;
@@ -205,6 +210,7 @@
 				B3FCC410183A1B35005BF9D9 /* APLAppDelegate.m in Sources */,
 				B3FCC41D183A1BA6005BF9D9 /* main.m in Sources */,
 				B3FCC411183A1B35005BF9D9 /* APLMenuViewController.m in Sources */,
+				B6A281FE18EEB2B200926904 /* APLSlideMenuSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

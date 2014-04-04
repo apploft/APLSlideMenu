@@ -14,19 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    id rootViewController = self.window.rootViewController;
-    if ([rootViewController isKindOfClass:[APLSlideMenuViewController class]]) {
-        APLSlideMenuViewController *slideViewController = rootViewController;
-        slideViewController.bouncing = YES;
-        slideViewController.menuWidth = 0.8;
-        slideViewController.gestureSupport = APLSlideMenuGestureSupportDrag;
-        slideViewController.leftMenuViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Menu"];
-        slideViewController.contentViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Content"];
-    } else {
-        NSLog(@"Ups, this shouldn't happen");
-    }
-    
+
     return YES;
 }
 							
