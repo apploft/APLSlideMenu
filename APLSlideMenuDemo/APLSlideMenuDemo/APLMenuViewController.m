@@ -53,7 +53,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:@"aCell"];
-    aCell.textLabel.text = [NSString stringWithFormat:@"Menu %d",indexPath.row];
+    aCell.textLabel.text = [NSString stringWithFormat:@"Menu %ld",(long)indexPath.row];
     return aCell;
 }
 
@@ -61,7 +61,7 @@
     self.currentIndexPath = indexPath;
     id contentViewController = self.slideMenuController.contentViewController;
     if ([contentViewController isKindOfClass:[APLViewController class]]) {
-        [(APLViewController*) contentViewController textLabel].text = [NSString stringWithFormat:@"Content %d",indexPath.row];
+        [(APLViewController*) contentViewController textLabel].text = [NSString stringWithFormat:@"Content %ld",(long)indexPath.row];
         [self.slideMenuController hideMenu:YES];
     }
 }

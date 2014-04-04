@@ -28,7 +28,7 @@
 }
 
 - (void)showMenu:(id)sender {
-    [self.slideMenuController showMenu:YES];
+    [self.slideMenuController showLeftMenu:YES];
 }
 
 - (IBAction)gestureSupportChanged:(UISegmentedControl*)sender {
