@@ -186,7 +186,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     if (menuViewController) {
         UIView *menuView    = menuViewController.view;
         CGRect menuFrame = self.view.bounds;
-        menuFrame.size.width = self.menuWidth + kAPLSlideMenuFirstOffset;
+        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
         
         menuView.frame = menuFrame;
         
@@ -209,7 +209,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     if (menuViewController) {
         UIView *menuView    = menuViewController.view;
         CGRect menuFrame = self.view.bounds;
-        menuFrame.size.width = self.menuWidth + kAPLSlideMenuFirstOffset;
+        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
         menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
         
         menuView.frame = menuFrame;
