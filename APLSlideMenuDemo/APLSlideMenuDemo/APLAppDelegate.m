@@ -20,7 +20,7 @@
         APLSlideMenuViewController *slideViewController = rootViewController;
         slideViewController.bouncing = YES;
         slideViewController.gestureSupport = APLSlideMenuGestureSupportDrag;
-        slideViewController.menuViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Menu"];
+        slideViewController.leftMenuViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Menu"];
         slideViewController.contentViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Content"];
     } else {
         NSLog(@"Ups, this shouldn't happen");
