@@ -19,6 +19,7 @@
     if ([rootViewController isKindOfClass:[APLSlideMenuViewController class]]) {
         APLSlideMenuViewController *slideViewController = rootViewController;
         slideViewController.bouncing = YES;
+        slideViewController.menuWidth = 0.8;
         slideViewController.gestureSupport = APLSlideMenuGestureSupportDrag;
         slideViewController.leftMenuViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Menu"];
         slideViewController.contentViewController = [[slideViewController storyboard] instantiateViewControllerWithIdentifier:@"Content"];

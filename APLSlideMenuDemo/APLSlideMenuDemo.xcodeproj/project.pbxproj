@@ -69,8 +69,8 @@
 				B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */,
 			);
 			name = APLSlideMenu;
-			path = ../../APLSlideMenu;
-			sourceTree = "<group>";
+			path = ../APLSlideMenu;
+			sourceTree = SOURCE_ROOT;
 		};
 		DD88AE2416809C51000412E1 = {
 			isa = PBXGroup;
