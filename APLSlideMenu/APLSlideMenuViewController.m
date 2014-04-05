@@ -226,6 +226,26 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     self.dragGestureRecognizer.enabled = gestureSupport != APLSlideMenuGestureSupportNone;
 }
 
+- (void)setMenuWidth:(CGFloat)menuWidth {
+    if (_menuWidth == menuWidth) {
+        return;
+    }
+    
+    _menuWidth = menuWidth;
+    
+    if (self.leftMenuViewController) {
+        CGRect menuFrame = self.leftMenuViewController.view.frame;
+        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
+        self.leftMenuViewController.view.frame = menuFrame;
+    }
+    
+    if (self.rightMenuViewController) {
+        CGRect menuFrame = self.rightMenuViewController.view.frame;
+        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
+        self.rightMenuViewController.view.frame = menuFrame;
+    }
+}
+
 #pragma mark - Menu view
 
 
