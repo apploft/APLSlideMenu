@@ -42,6 +42,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     _menuWidth          = kAPLSlideMenuDefaultMenuWidth;
     self.gestureSupport = APLSlideMenuGestureSupportBasic;
     
+    _useShadow          = YES;
     _keyboardVisible    = NO;
     _bouncing           = NO;
     _tapOnContentViewToHideMenu = YES;
@@ -92,16 +93,21 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     contentContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.contentContainerView = contentContainer;
     [self.view addSubview:contentContainer];
-    [self addShadowToView:contentContainer];
+    
+    if (self.useShadow) {
+        [self addShadowToView:contentContainer];    
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated  {
     [super viewWillAppear:animated];
     
     // Correct shadow size
-    UIView *currentView = self.contentViewController.view;
-    currentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:currentView.bounds].CGPath;
-
+    if (self.useShadow) {
+        UIView *currentView = self.contentViewController.view;
+        currentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:currentView.bounds].CGPath;
+    }
+    
     if (!self.presentedViewController) {
         [self displayMenuSideBySideIfNeededForOrientation:[UIApplication sharedApplication].statusBarOrientation];
     }
@@ -298,6 +304,15 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     return self.contentViewController;
 }
 
+- (void)setUseShadow:(BOOL)useIt {
+    _useShadow = useIt;
+    if (_useShadow) {
+        [self addShadowToView:self.contentContainerView];
+    } else {
+        [self removeShadowFromView:self.contentContainerView];
+    }
+}
+
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -312,7 +327,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - Screen setup
 
--(void)addShadowToView:(UIView*)aView {
+- (void)addShadowToView:(UIView*)aView {
     aView.clipsToBounds = NO;
     aView.layer.shadowPath = [UIBezierPath bezierPathWithRect:aView.bounds].CGPath;
     aView.layer.shadowRadius = 10;
@@ -321,6 +336,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     aView.layer.shadowColor = [UIColor blackColor].CGColor;
 }
 
+- (void)removeShadowFromView:(UIView*)aView {
+    aView.clipsToBounds = YES;
+}
 
 #pragma mark - MenuHandling
 
