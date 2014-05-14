@@ -475,8 +475,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
             [self.contentContainerView addGestureRecognizer:self.hideTapGestureRecognizer];
             self.contentViewController.view.userInteractionEnabled = NO;
         }
-        if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(didShowMenu:)]) {
-            [self.slideDelegate didShowMenu:self];
+        if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(didShow:forSlideMenuViewController:)]) {
+            [self.slideDelegate didShow:viewController forSlideMenuViewController:self];
         }
         [self notifyDidShowMenu];
     };
@@ -511,8 +511,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         self.contentContainerView.frame = contentFrame;
     };
     
-    if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(willShowMenu:)]) {
-        [self.slideDelegate willShowMenu:self];
+    if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(willShow:forSlideMenuViewController:)]) {
+        [self.slideDelegate willShow:viewController forSlideMenuViewController:self];
     }
     [self notifyWillShowMenu];
     
@@ -540,8 +540,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
             self.contentViewController.view.userInteractionEnabled = YES;
         }
         
-        if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(didHideMenu:)]) {
-            [self.slideDelegate didHideMenu:self];
+        if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(didHide:forSlideMenuViewController:)]) {
+            [self.slideDelegate didHide:self.activeMenuViewController forSlideMenuViewController:self];
         }
         [self notifyDidHideMenu];
     };
@@ -574,8 +574,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         self.contentContainerView.frame = contentFrame;
     };
     
-    if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(willHideMenu:)]) {
-        [self.slideDelegate willHideMenu:self];
+    if (self.slideDelegate && [self.slideDelegate respondsToSelector:@selector(willHide:forSlideMenuViewController:)]) {
+        [self.slideDelegate willHide:self.activeMenuViewController forSlideMenuViewController:self];
     }
     [self notifyWillHideMenu];
     

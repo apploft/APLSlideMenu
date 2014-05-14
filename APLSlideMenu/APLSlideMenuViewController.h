@@ -22,10 +22,10 @@ extern NSString *APLSlideMenuDidHideNotification;
 
 @protocol APLSlideMenuViewControllerDelegate<NSObject>
 @optional
--(void) willShowMenu:(APLSlideMenuViewController *)aViewController;
--(void) didShowMenu:(APLSlideMenuViewController *)aViewController;
--(void) willHideMenu:(APLSlideMenuViewController *)aViewController;
--(void) didHideMenu:(APLSlideMenuViewController *)aViewController;
+-(void) willShow:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) didShow:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) willHide:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) didHide:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
 @end
 
 /* To be implemented by any view controller who wants to influence 
