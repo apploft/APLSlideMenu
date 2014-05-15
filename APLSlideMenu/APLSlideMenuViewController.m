@@ -155,6 +155,17 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - Properties
 
+- (void)setMenuWidth:(CGFloat)width
+{
+    _menuWidth = width;
+
+    CGRect leftMenuFrame = [self setupFrameForMenuView:self.leftMenuViewController.view toTheRight:NO];
+    self.leftMenuViewController.view.frame = leftMenuFrame;
+
+    CGRect rightMenuFrame = [self setupFrameForMenuView:self.rightMenuViewController.view toTheRight:YES];
+    self.rightMenuViewController.view.frame = rightMenuFrame;
+}
+
 -(void)setMenuViewVisible:(BOOL)menuViewVisible {
     _menuViewVisible = menuViewVisible;
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
@@ -181,48 +192,35 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 }
 
 - (void)setLeftMenuViewController:(UIViewController *)menuViewController {
-    
+
     if (_leftMenuViewController) {
         [_leftMenuViewController willMoveToParentViewController:nil];
         [_leftMenuViewController.view removeFromSuperview];
         [_leftMenuViewController removeFromParentViewController];
     }
-    
+
     _leftMenuViewController = menuViewController;
     if (menuViewController) {
-        UIView *menuView    = menuViewController.view;
-        CGRect menuFrame = self.view.bounds;
-        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
-        
-        menuView.frame = menuFrame;
-        
         [self addChildViewController:menuViewController];
-        [self.view insertSubview:menuView atIndex:0];
-        
+        [self.view insertSubview:[self setupMenuView:menuViewController toTheRight:NO] atIndex:0];
+
         [menuViewController didMoveToParentViewController:self];
     }
 }
 
 - (void)setRightMenuViewController:(UIViewController *)menuViewController {
-    
+
     if (_rightMenuViewController) {
         [_rightMenuViewController willMoveToParentViewController:nil];
         [_rightMenuViewController.view removeFromSuperview];
         [_rightMenuViewController removeFromParentViewController];
     }
-    
+
     _rightMenuViewController = menuViewController;
     if (menuViewController) {
-        UIView *menuView    = menuViewController.view;
-        CGRect menuFrame = self.view.bounds;
-        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
-        menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
-        
-        menuView.frame = menuFrame;
-        
         [self addChildViewController:menuViewController];
-        [self.view insertSubview:menuView atIndex:0];
-        
+        [self.view insertSubview:[self setupMenuView:menuViewController toTheRight:YES] atIndex:0];
+
         [menuViewController didMoveToParentViewController:self];
     }
 }
@@ -338,6 +336,26 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 - (void)removeShadowFromView:(UIView*)aView {
     aView.clipsToBounds = YES;
+}
+
+- (UIView *)setupMenuView:(UIViewController *)menuViewController toTheRight:(BOOL)right
+{
+    UIView *menuView = menuViewController.view;
+
+    menuView.frame = [self setupFrameForMenuView:menuViewController.view toTheRight:right];
+
+    return menuView;
+}
+
+- (CGRect)setupFrameForMenuView:(UIView *)view toTheRight:(BOOL)right
+{
+    CGRect menuFrame = self.view.bounds;
+    menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
+    if (right) {
+        menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
+    }
+
+    return menuFrame;
 }
 
 #pragma mark - MenuHandling
