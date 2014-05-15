@@ -13,7 +13,7 @@ NSString *APLSlideMenuDidHideNotification = @"APLSlideMenuDidHideNotificationInt
 static NSTimeInterval kAPLSlideMenuDefaultAnimationDuration = 0.25;
 static CGFloat kAPLSlideMenuDefaultMenuWidth = 260.0;
 static NSTimeInterval kAPLSlideMenuDefaultBounceDuration = 0.2;
-static CGFloat kAPLSlideMenuFirstOffset = 4.0;
+static CGFloat kAPLSlideMenuFirstOffset = 0.0;
 
 
 @interface APLSlideMenuViewController() <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
