@@ -66,6 +66,7 @@ extern NSString *APLSlideMenuDidHideNotification;
 @property (nonatomic, assign, getter = isShowMenuInLandscape) BOOL showMenuInLandscape;
 
 @property (nonatomic, assign) BOOL useShadow;
+@property (nonatomic, assign) BOOL prefersStatusBarHiddenSwitch;
 
 /** Set content view controller animated. */
 - (void) setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;

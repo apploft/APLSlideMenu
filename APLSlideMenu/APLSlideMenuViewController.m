@@ -114,6 +114,12 @@ static CGFloat kAPLSlideMenuFirstOffset = 0.0;
 
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return self.prefersStatusBarHiddenSwitch;
+}
+
+
 #pragma mark - Interface rotation
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
