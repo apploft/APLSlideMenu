@@ -15,10 +15,12 @@ typedef NS_ENUM(NSInteger,APLSlideMenuGestureSupportType) {
 @class APLSlideMenuViewController;
 @protocol TRUMainMenuViewControllerDelegate;
 
-extern NSString *APLSlideMenuWillShowNotification;
-extern NSString *APLSlideMenuDidShowNotification;
-extern NSString *APLSlideMenuWillHideNotification;
-extern NSString *APLSlideMenuDidHideNotification;
+extern NSString * const APLSlideMenuWillShowCenterNotification;
+extern NSString * const APLSlideMenuWillShowLeftNotification;
+extern NSString * const APLSlideMenuWillShowNotification;
+extern NSString * const APLSlideMenuDidShowNotification;
+extern NSString * const APLSlideMenuWillHideNotification;
+extern NSString * const APLSlideMenuDidHideNotification;
 
 @protocol APLSlideMenuViewControllerDelegate<NSObject>
 @optional
