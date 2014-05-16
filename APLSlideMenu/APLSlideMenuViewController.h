@@ -15,17 +15,19 @@ typedef NS_ENUM(NSInteger,APLSlideMenuGestureSupportType) {
 @class APLSlideMenuViewController;
 @protocol TRUMainMenuViewControllerDelegate;
 
-extern NSString *APLSlideMenuWillShowNotification;
-extern NSString *APLSlideMenuDidShowNotification;
-extern NSString *APLSlideMenuWillHideNotification;
-extern NSString *APLSlideMenuDidHideNotification;
+extern NSString * const APLSlideMenuWillShowCenterNotification;
+extern NSString * const APLSlideMenuWillShowLeftNotification;
+extern NSString * const APLSlideMenuWillShowNotification;
+extern NSString * const APLSlideMenuDidShowNotification;
+extern NSString * const APLSlideMenuWillHideNotification;
+extern NSString * const APLSlideMenuDidHideNotification;
 
 @protocol APLSlideMenuViewControllerDelegate<NSObject>
 @optional
--(void) willShowMenu:(APLSlideMenuViewController *)aViewController;
--(void) didShowMenu:(APLSlideMenuViewController *)aViewController;
--(void) willHideMenu:(APLSlideMenuViewController *)aViewController;
--(void) didHideMenu:(APLSlideMenuViewController *)aViewController;
+-(void) willShow:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) didShow:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) willHide:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
+-(void) didHide:(UIViewController *)viewController forSlideMenuViewController:(APLSlideMenuViewController *)slideMenuViewController;
 @end
 
 /* To be implemented by any view controller who wants to influence 
@@ -64,6 +66,9 @@ extern NSString *APLSlideMenuDidHideNotification;
 
 /** always show menu like an UISplitViewController in landscape on iPad */
 @property (nonatomic, assign, getter = isShowMenuInLandscape) BOOL showMenuInLandscape;
+
+@property (nonatomic, assign) BOOL useShadow;
+@property (nonatomic, assign) BOOL prefersStatusBarHiddenSwitch;
 
 /** Set content view controller animated. */
 - (void) setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;
