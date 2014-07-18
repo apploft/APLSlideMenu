@@ -12,7 +12,8 @@
 
 @property (nonatomic, assign) IBOutlet UILabel *textLabel;
 
-- (IBAction)showMenu:(id)sender;
+- (IBAction)showLeftMenu:(id)sender;
+- (IBAction)showRightMenu:(id)sender;
 - (IBAction)gestureSupportChanged:(id)sender;
 
 @end

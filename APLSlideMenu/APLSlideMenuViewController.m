@@ -77,7 +77,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     return self;
 }
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     //Create GestureRecognizers for NavigationView
@@ -93,6 +93,23 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     self.contentContainerView = contentContainer;
     [self.view addSubview:contentContainer];
     [self addShadowToView:contentContainer];
+    
+    // Set left menu, right menu, and content view controller via story board.
+    @try {
+        [self performSegueWithIdentifier:@"content" sender:self];
+    }
+    @catch (NSException *exception) {
+    }
+    @try {
+        [self performSegueWithIdentifier:@"leftMenu" sender:self];
+    }
+    @catch (NSException *exception) {
+    }
+    @try {
+        [self performSegueWithIdentifier:@"rightMenu" sender:self];
+    }
+    @catch (NSException *exception) {
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated  {

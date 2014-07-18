@@ -18,7 +18,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view, typically from a nib.
+    self.slideMenuController.bouncing = YES;
+    self.slideMenuController.gestureSupport = APLSlideMenuGestureSupportDrag;
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,8 +30,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showMenu:(id)sender {
+- (void)showLeftMenu:(id)sender {
     [self.slideMenuController showLeftMenu:YES];
+}
+
+- (void)showRightMenu:(id)sender {
+    [self.slideMenuController showRightMenu:YES];
 }
 
 - (IBAction)gestureSupportChanged:(UISegmentedControl*)sender {
