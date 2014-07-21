@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -9,6 +9,10 @@
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="APLSlideMenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Mc-tE-KFb"/>
+                        <viewControllerLayoutGuide type="bottom" id="n3k-Db-Q4l"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -65,56 +69,62 @@
         <scene sceneID="TkZ-v8-ryK">
             <objects>
                 <viewController storyboardIdentifier="Content" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T0f-c6-agC" userLabel="Content View Controller" customClass="APLViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qKs-pJ-L5D"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vg2-Gp-zep"/>
+                    </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fsA-td-I69">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Content" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Z7-1y-va1">
-                                <rect key="frame" x="0.0" y="324" width="320" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8LZ-KY-lnT">
-                                <rect key="frame" x="105" y="46" width="110" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="show Left Menu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LZ-KY-lnT">
+                                <rect key="frame" x="85" y="40" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="CAf-uc-vmV"/>
+                                    <constraint firstAttribute="width" constant="150" id="Q13-bu-Jiz"/>
+                                </constraints>
+                                <state key="normal" title="show left menu">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showLeftMenu:" destination="T0f-c6-agC" eventType="touchUpInside" id="6AT-xx-CUL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4wY-cj-GjR">
-                                <rect key="frame" x="101" y="83" width="120" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="show Right Menu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wY-cj-GjR">
+                                <rect key="frame" x="85" y="80" width="150" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2R0-xO-URC"/>
+                                    <constraint firstAttribute="width" constant="150" id="RZK-T7-1A7"/>
+                                </constraints>
+                                <state key="normal" title="show right menu">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showRightMenu:" destination="T0f-c6-agC" eventType="touchUpInside" id="mwX-eJ-v5R"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d4B-zi-50b">
-                                <rect key="frame" x="139" y="115" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4B-zi-50b">
+                                <rect key="frame" x="76" y="-11" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ueb-xW-IHp">
-                                <rect key="frame" x="80" y="133" width="163" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <string key="text">or use a slide gesture
------------------&gt;</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="or use a slide gesture" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="ueb-xW-IHp">
+                                <rect key="frame" x="60" y="124" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3Vi-tb-Cgs"/>
+                                    <constraint firstAttribute="height" constant="30" id="Jcq-Nz-WpR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Nc0-H6-28O">
-                                <rect key="frame" x="57" y="237" width="206" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Nc0-H6-28O">
+                                <rect key="frame" x="57" y="205" width="206" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="0ka-RE-vug"/>
+                                    <constraint firstAttribute="width" constant="206" id="5w1-0h-9hA"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Drag"/>
                                     <segment title="Basic"/>
@@ -124,20 +134,66 @@
                                     <action selector="gestureSupportChanged:" destination="T0f-c6-agC" eventType="valueChanged" id="gy5-9m-DMd"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Gesture support:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aGQ-KF-kra">
-                                <rect key="frame" x="0.0" y="196" width="320" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="gesture support:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGQ-KF-kra">
+                                <rect key="frame" x="0.0" y="174" width="320" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Exf-Bj-cGH"/>
+                                    <constraint firstAttribute="width" constant="320" id="oip-Gb-Erc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISI-4x-41w">
+                                <rect key="frame" x="0.0" y="253" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="MVs-KL-Hdk"/>
+                                    <constraint firstAttribute="height" constant="40" id="fbL-6U-iq0"/>
+                                </constraints>
+                                <state key="normal" title="show left menu in landscape (iPad)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" title="✓ show left menu in landscape (iPad)"/>
+                                <connections>
+                                    <action selector="toggleLeftMenuInLandscape:" destination="T0f-c6-agC" eventType="touchUpInside" id="pNL-hA-KaH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDd-cB-kJF">
+                                <rect key="frame" x="0.0" y="293" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="V6h-fj-OAm"/>
+                                    <constraint firstAttribute="width" constant="320" id="sIK-kt-kZ1"/>
+                                </constraints>
+                                <state key="normal" title="show right menu in landscape (iPad)">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" title="✓ show right menu in landscape (iPad)"/>
+                                <connections>
+                                    <action selector="toggleRightMenuInLandscape:" destination="T0f-c6-agC" eventType="touchUpInside" id="V47-2b-9jD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="4wY-cj-GjR" secondAttribute="centerX" id="1ex-qj-jFA"/>
+                            <constraint firstAttribute="centerX" secondItem="hDd-cB-kJF" secondAttribute="centerX" id="2x7-Da-qOb"/>
+                            <constraint firstItem="ISI-4x-41w" firstAttribute="top" secondItem="Nc0-H6-28O" secondAttribute="bottom" constant="20" id="4TG-lY-ULU"/>
+                            <constraint firstAttribute="centerX" secondItem="ueb-xW-IHp" secondAttribute="centerX" id="5nq-N9-dLR"/>
+                            <constraint firstItem="aGQ-KF-kra" firstAttribute="top" secondItem="ueb-xW-IHp" secondAttribute="bottom" constant="20" id="ECr-DC-bY0"/>
+                            <constraint firstAttribute="centerX" secondItem="8LZ-KY-lnT" secondAttribute="centerX" id="G0G-0q-VGg"/>
+                            <constraint firstItem="4wY-cj-GjR" firstAttribute="top" secondItem="8LZ-KY-lnT" secondAttribute="bottom" id="GCI-PZ-Dhf"/>
+                            <constraint firstAttribute="centerX" secondItem="ISI-4x-41w" secondAttribute="centerX" id="JFU-29-P2i"/>
+                            <constraint firstAttribute="centerX" secondItem="Nc0-H6-28O" secondAttribute="centerX" id="JGN-G6-Ncz"/>
+                            <constraint firstItem="8LZ-KY-lnT" firstAttribute="top" secondItem="qKs-pJ-L5D" secondAttribute="bottom" constant="20" id="K4j-XF-j4d"/>
+                            <constraint firstItem="hDd-cB-kJF" firstAttribute="top" secondItem="ISI-4x-41w" secondAttribute="bottom" id="L58-aR-zUB"/>
+                            <constraint firstItem="ueb-xW-IHp" firstAttribute="top" secondItem="4wY-cj-GjR" secondAttribute="bottom" constant="4" id="Rda-Pi-trm"/>
+                            <constraint firstAttribute="centerX" secondItem="aGQ-KF-kra" secondAttribute="centerX" id="ejz-pT-4ob"/>
+                            <constraint firstItem="Nc0-H6-28O" firstAttribute="top" secondItem="aGQ-KF-kra" secondAttribute="bottom" constant="10" id="vIQ-Y9-CmB"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
-                    <connections>
-                        <outlet property="textLabel" destination="1Z7-1y-va1" id="3nf-K5-kKD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovD-NG-bOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

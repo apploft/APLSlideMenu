@@ -15,5 +15,7 @@
 - (IBAction)showLeftMenu:(id)sender;
 - (IBAction)showRightMenu:(id)sender;
 - (IBAction)gestureSupportChanged:(id)sender;
+- (IBAction)toggleLeftMenuInLandscape:(UIButton*)sender;
+- (IBAction)toggleRightMenuInLandscape:(UIButton*)sender;
 
 @end

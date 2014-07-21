@@ -115,14 +115,17 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (void)viewWillAppear:(BOOL)animated  {
     [super viewWillAppear:animated];
     
-    // Correct shadow size
-    UIView *currentView = self.contentViewController.view;
-    currentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:currentView.bounds].CGPath;
-
+    [self updateShadowPath];
     if (!self.presentedViewController) {
         [self displayMenuSideBySideIfNeededForOrientation:[UIApplication sharedApplication].statusBarOrientation];
     }
 
+}
+
+- (void)updateShadowPath {
+    // Correct shadow size
+    UIView *currentView = self.contentContainerView;
+    currentView.layer.shadowPath = [UIBezierPath bezierPathWithRect:currentView.bounds].CGPath;
 }
 
 #pragma mark - Interface rotation
@@ -145,13 +148,18 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     }];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self updateShadowPath];
+}
+
 - (void)displayMenuSideBySideIfNeededForOrientation:(UIInterfaceOrientation)orientation {
-    BOOL displayMenuSideBySide = self.isShowMenuInLandscape && (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && UIInterfaceOrientationIsLandscape(orientation);
+    BOOL displayMenuSideBySide = (self.isShowLeftMenuInLandscape || self.isShowRightMenuInLandscape) && (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && UIInterfaceOrientationIsLandscape(orientation);
     
-    CGFloat offsetX = displayMenuSideBySide? [self menuAbsoluteWidth] : 0.;
+    CGFloat offsetLeft = displayMenuSideBySide && self.isShowLeftMenuInLandscape ? [self menuAbsoluteWidth] : 0.;
+    CGFloat offsetRight = displayMenuSideBySide && self.isShowRightMenuInLandscape ? [self menuAbsoluteWidth] : 0.;
     CGRect frame = self.contentContainerView.frame;
-    frame.origin.x = offsetX;
-    frame.size.width = self.view.bounds.size.width - offsetX;
+    frame.origin.x = offsetLeft;
+    frame.size.width = self.view.bounds.size.width - offsetLeft - offsetRight;
     self.contentContainerView.frame = frame;
     
     self.contentContainerView.clipsToBounds = displayMenuSideBySide;
@@ -206,6 +214,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
         
         menuView.frame = menuFrame;
+        menuView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
         
         [self addChildViewController:menuViewController];
         [self.view insertSubview:menuView atIndex:0];
@@ -230,6 +239,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
         
         menuView.frame = menuFrame;
+        menuView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
         
         [self addChildViewController:menuViewController];
         [self.view insertSubview:menuView atIndex:0];

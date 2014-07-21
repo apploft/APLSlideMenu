@@ -48,4 +48,15 @@
     }
     self.slideMenuController.gestureSupport = support;
 }
+
+- (IBAction)toggleLeftMenuInLandscape:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    self.slideMenuController.showLeftMenuInLandscape = sender.selected;
+}
+
+- (IBAction)toggleRightMenuInLandscape:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    self.slideMenuController.showRightMenuInLandscape = sender.selected;
+}
+
 @end

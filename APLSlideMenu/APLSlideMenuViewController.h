@@ -63,7 +63,8 @@ extern NSString *APLSlideMenuDidHideNotification;
 @property (nonatomic, assign, getter = isBouncing) BOOL bouncing;
 
 /** always show menu like an UISplitViewController in landscape on iPad */
-@property (nonatomic, assign, getter = isShowMenuInLandscape) BOOL showMenuInLandscape;
+@property (nonatomic, assign, getter = isShowLeftMenuInLandscape) BOOL showLeftMenuInLandscape;
+@property (nonatomic, assign, getter = isShowRightMenuInLandscape) BOOL showRightMenuInLandscape;
 
 /** Set content view controller animated. */
 - (void) setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;

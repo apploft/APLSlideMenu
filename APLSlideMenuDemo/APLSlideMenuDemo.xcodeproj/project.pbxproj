@@ -65,6 +65,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3ED54A5197D3050005230DB /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		B3FCC43E183A2509005BF9D9 /* APLSlideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +115,7 @@
 		DD88AE3616809C51000412E1 /* APLSlideMenuDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B3ED54A5197D3050005230DB /* iPad */,
 				B3FCC40A183A1B35005BF9D9 /* APLAppDelegate.h */,
 				B3FCC40B183A1B35005BF9D9 /* APLAppDelegate.m */,
 				B3FCC40E183A1B35005BF9D9 /* APLViewController.h */,
@@ -303,7 +311,9 @@
 					../APLSlideMenu,
 				);
 				INFOPLIST_FILE = "APLSlideMenuDemo/APLSlideMenuDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = APLSlideMenuDemo;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -319,7 +329,9 @@
 					../APLSlideMenu,
 				);
 				INFOPLIST_FILE = "APLSlideMenuDemo/APLSlideMenuDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = APLSlideMenuDemo;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
