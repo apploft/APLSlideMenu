@@ -66,6 +66,9 @@ extern NSString *APLSlideMenuDidHideNotification;
 @property (nonatomic, assign, getter = isShowLeftMenuInLandscape) BOOL showLeftMenuInLandscape;
 @property (nonatomic, assign, getter = isShowRightMenuInLandscape) BOOL showRightMenuInLandscape;
 
+/** draw a shadow above menu view controllers, default is YES */
+@property (nonatomic, assign) BOOL useShadow;
+
 /** Set content view controller animated. */
 - (void) setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;
 

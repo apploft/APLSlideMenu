@@ -45,6 +45,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     _keyboardVisible    = NO;
     _bouncing           = NO;
     _tapOnContentViewToHideMenu = YES;
+    self.useShadow = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -162,7 +163,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     frame.size.width = self.view.bounds.size.width - offsetLeft - offsetRight;
     self.contentContainerView.frame = frame;
     
-    self.contentContainerView.clipsToBounds = displayMenuSideBySide;
+    self.contentContainerView.clipsToBounds = displayMenuSideBySide || !self.useShadow;
     self.displayMenuSideBySide = displayMenuSideBySide;
     self.leftMenuViewController.view.accessibilityElementsHidden = !displayMenuSideBySide || !self.isShowLeftMenuInLandscape;
     self.rightMenuViewController.view.accessibilityElementsHidden = !displayMenuSideBySide || !self.isShowRightMenuInLandscape;
@@ -277,6 +278,11 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     }
 }
 
+- (void)setUseShadow:(BOOL)useShadow {
+    _useShadow = useShadow;
+    self.contentContainerView.clipsToBounds = !useShadow || self.isDisplayMenuSideBySide;
+}
+
 #pragma mark - Menu view
 
 
@@ -364,7 +370,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 #pragma mark - Screen setup
 
 -(void)addShadowToView:(UIView*)aView {
-    aView.clipsToBounds = NO;
+    aView.clipsToBounds = !self.useShadow;
     aView.layer.shadowPath = [UIBezierPath bezierPathWithRect:aView.bounds].CGPath;
     aView.layer.shadowRadius = 10;
     aView.layer.shadowOpacity = 0.75;
@@ -654,7 +660,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     self.keyboardVisible = NO;
 }
 
-#pragma mark UIGestureRecognizerDelegate
+#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     
