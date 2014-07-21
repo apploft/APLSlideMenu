@@ -164,6 +164,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     
     self.contentContainerView.clipsToBounds = displayMenuSideBySide;
     self.displayMenuSideBySide = displayMenuSideBySide;
+    self.leftMenuViewController.view.accessibilityElementsHidden = !displayMenuSideBySide || !self.isShowLeftMenuInLandscape;
+    self.rightMenuViewController.view.accessibilityElementsHidden = !displayMenuSideBySide || !self.isShowRightMenuInLandscape;
 }
 
 #pragma mark - status bar style
@@ -210,6 +212,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     _leftMenuViewController = menuViewController;
     if (menuViewController) {
         UIView *menuView    = menuViewController.view;
+        menuView.accessibilityElementsHidden = YES;
         CGRect menuFrame = self.view.bounds;
         menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
         
@@ -234,6 +237,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     _rightMenuViewController = menuViewController;
     if (menuViewController) {
         UIView *menuView    = menuViewController.view;
+        menuView.accessibilityElementsHidden = YES;
         CGRect menuFrame = self.view.bounds;
         menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
         menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
@@ -497,6 +501,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     
     CGFloat direction = (viewController == self.leftMenuViewController) ? 1. : -1.;
     
+    viewController.view.accessibilityElementsHidden = NO;
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
+    
     void(^showMenuCompletionBlock)(BOOL) = ^(BOOL finished) {
         self.menuViewVisible = YES;
         self.activeMenuViewController = viewController;
@@ -561,7 +568,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     if (self.isDisplayMenuSideBySide) return;
     
     CGFloat direction = (self.activeMenuViewController == self.leftMenuViewController) ? 1. : -1.;
-        
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.contentViewController.view);
+    self.leftMenuViewController.view.accessibilityElementsHidden = YES;
+    self.rightMenuViewController.view.accessibilityElementsHidden = YES;
+    
     void (^hideMenuCompletionBlock)(BOOL) = ^(BOOL finished) {
         self.menuViewVisible = NO;
         if (self.tapOnContentViewToHideMenu) {
