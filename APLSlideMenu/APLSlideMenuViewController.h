@@ -69,6 +69,9 @@ extern NSString *APLSlideMenuDidHideNotification;
 /** draw a shadow above menu view controllers, default is YES */
 @property (nonatomic, assign) BOOL useShadow;
 
+/** color of border between menu and content in landscape on iPad when showLeftMenuInLandscape or showRightMenuInLandscape is enabled, default is [UIColor clearColor] */
+@property (nonatomic, strong) UIColor* separatorColor;
+
 /** Set content view controller animated. */
 - (void) setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated;
 

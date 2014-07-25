@@ -26,6 +26,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 @property (nonatomic, assign) UIView *contentContainerView;
 @property (nonatomic, assign, getter = isDisplayMenuSideBySide) BOOL displayMenuSideBySide;
 @property (nonatomic, strong, readwrite) UIViewController *activeMenuViewController;
+@property (nonatomic, strong) CALayer *borderLayer;
+@property (nonatomic, assign) CGRect borderFrame;
 
 @end
 
@@ -161,6 +163,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     CGRect frame = self.contentContainerView.frame;
     frame.origin.x = offsetLeft;
     frame.size.width = self.view.bounds.size.width - offsetLeft - offsetRight;
+    CGRect borderFrame = self.borderLayer.frame;
+    borderFrame.size.width = self.borderFrame.size.width - ((offsetLeft && offsetRight) ? offsetRight : 0.);
+    self.borderLayer.frame = borderFrame;
+    self.borderLayer.hidden = !displayMenuSideBySide;
     self.contentContainerView.frame = frame;
     
     self.contentContainerView.clipsToBounds = displayMenuSideBySide || !self.useShadow;
@@ -281,6 +287,30 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (void)setUseShadow:(BOOL)useShadow {
     _useShadow = useShadow;
     self.contentContainerView.clipsToBounds = !useShadow || self.isDisplayMenuSideBySide;
+}
+
+- (CALayer *)borderLayer {
+    if (!_borderLayer) {
+        _borderLayer = [CALayer layer];
+        _borderLayer.borderColor = (self.separatorColor ?: [UIColor clearColor]).CGColor;
+        _borderLayer.borderWidth = 1;
+        CGRect frame = self.contentContainerView.bounds;
+        frame.origin.y -= 1.;
+        frame.size.width -= kAPLSlideMenuFirstOffset;
+        frame.size.height += 2.;
+        _borderLayer.frame = frame;
+        self.borderFrame = frame;
+        _borderLayer.hidden = YES;
+        [self.contentContainerView.layer addSublayer:_borderLayer];
+    }
+    return _borderLayer;
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor {
+    _separatorColor = separatorColor;
+    if (!CGRectEqualToRect(self.borderFrame, CGRectZero)) {
+        self.borderLayer.borderColor = separatorColor.CGColor;
+    }
 }
 
 #pragma mark - Menu view
