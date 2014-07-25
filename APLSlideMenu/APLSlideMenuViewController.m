@@ -26,8 +26,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 @property (nonatomic, assign) UIView *contentContainerView;
 @property (nonatomic, assign, getter = isDisplayMenuSideBySide) BOOL displayMenuSideBySide;
 @property (nonatomic, strong, readwrite) UIViewController *activeMenuViewController;
-@property (nonatomic, strong) CALayer *borderLayer;
-@property (nonatomic, assign) CGRect borderFrame;
+@property (nonatomic, strong) UIView *leftSeparatorView;
+@property (nonatomic, strong) UIView *rightSeparatorView;
 
 @end
 
@@ -97,6 +97,18 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     [self.view addSubview:contentContainer];
     [self addShadowToView:contentContainer];
     
+    self.leftSeparatorView = [[UIView alloc] initWithFrame:CGRectMake(0., 0., 1., self.view.bounds.size.height)];
+    self.leftSeparatorView.backgroundColor = self.separatorColor;
+    self.leftSeparatorView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+    self.leftSeparatorView.hidden = YES;
+    [contentContainer addSubview:self.leftSeparatorView];
+    
+    self.rightSeparatorView = [[UIView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 1., 0., 1., self.view.bounds.size.height)];
+    self.rightSeparatorView.backgroundColor = self.separatorColor;
+    self.rightSeparatorView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
+    self.rightSeparatorView.hidden = YES;
+    [contentContainer addSubview:self.rightSeparatorView];
+    
     // Set left menu, right menu, and content view controller via story board.
     @try {
         [self performSegueWithIdentifier:@"content" sender:self];
@@ -163,11 +175,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     CGRect frame = self.contentContainerView.frame;
     frame.origin.x = offsetLeft;
     frame.size.width = self.view.bounds.size.width - offsetLeft - offsetRight;
-    CGRect borderFrame = self.borderLayer.frame;
-    borderFrame.size.width = self.borderFrame.size.width - ((offsetLeft && offsetRight) ? offsetRight : 0.);
-    self.borderLayer.frame = borderFrame;
-    self.borderLayer.hidden = !displayMenuSideBySide;
     self.contentContainerView.frame = frame;
+    self.leftSeparatorView.hidden = !(displayMenuSideBySide && self.isShowLeftMenuInLandscape);
+    self.rightSeparatorView.hidden = !(displayMenuSideBySide && self.isShowRightMenuInLandscape);
     
     self.contentContainerView.clipsToBounds = displayMenuSideBySide || !self.useShadow;
     self.displayMenuSideBySide = displayMenuSideBySide;
@@ -289,28 +299,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     self.contentContainerView.clipsToBounds = !useShadow || self.isDisplayMenuSideBySide;
 }
 
-- (CALayer *)borderLayer {
-    if (!_borderLayer) {
-        _borderLayer = [CALayer layer];
-        _borderLayer.borderColor = (self.separatorColor ?: [UIColor clearColor]).CGColor;
-        _borderLayer.borderWidth = 1;
-        CGRect frame = self.contentContainerView.bounds;
-        frame.origin.y -= 1.;
-        frame.size.width -= kAPLSlideMenuFirstOffset;
-        frame.size.height += 2.;
-        _borderLayer.frame = frame;
-        self.borderFrame = frame;
-        _borderLayer.hidden = YES;
-        [self.contentContainerView.layer addSublayer:_borderLayer];
-    }
-    return _borderLayer;
-}
-
 - (void)setSeparatorColor:(UIColor *)separatorColor {
     _separatorColor = separatorColor;
-    if (!CGRectEqualToRect(self.borderFrame, CGRectZero)) {
-        self.borderLayer.borderColor = separatorColor.CGColor;
-    }
+    self.leftSeparatorView.backgroundColor = separatorColor;
+    self.rightSeparatorView.backgroundColor = separatorColor;
 }
 
 #pragma mark - Menu view
@@ -341,7 +333,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     CGRect currentFrame     = self.view.bounds;
     currentFrame.origin.x   = currentFrame.size.width;
     self.contentContainerView.frame = currentFrame;
-    [self.contentContainerView addSubview:contentViewController.view];
+    [self.contentContainerView insertSubview:contentViewController.view atIndex:0];
     
     if (self.isMenuViewVisible) {
         currentFrame.origin.x = [self menuAbsoluteWidth];
