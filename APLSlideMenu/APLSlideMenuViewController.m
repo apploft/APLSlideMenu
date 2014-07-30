@@ -384,7 +384,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     if (([[navigationController viewControllers] count] < 2) || ([navigationController respondsToSelector:@selector(supportedInterfaceOrientations)] && ([navigationController supportedInterfaceOrientations] == UIInterfaceOrientationMaskAll))) return;
     
     [self presentViewController:[UIViewController new] animated:NO completion:^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         if (![self respondsToSelector:@selector(leftLayoutGuide)]) {
+#pragma clang diagnostic pop
             [self dismissViewControllerAnimated:NO completion:nil];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
