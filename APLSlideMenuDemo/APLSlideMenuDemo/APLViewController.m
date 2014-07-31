@@ -15,19 +15,12 @@
 
 @implementation APLViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view, typically from a nib.
     self.slideMenuController.bouncing = YES;
     self.slideMenuController.gestureSupport = APLSlideMenuGestureSupportDrag;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.slideMenuController.separatorColor = [UIColor grayColor];
 }
 
 - (void)showLeftMenu:(id)sender {
