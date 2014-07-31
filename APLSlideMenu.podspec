@@ -10,7 +10,9 @@ Pod::Spec.new do |s|
                    * supports optional swipe gesture support
                    * supports device orientations
                    * supports optional permanent display of slidemenu in landscape on iPad like an UISplitViewController
-                   * supports iOS 7 View controller-based status bar appearance
+                   * supports iOS 7 view controller-based status bar appearance
+                   * supports storyboard setup
+                   * basic accessibility support
                    DESC
 
   s.homepage     = "https://github.com/apploft/APLSlideMenu"
