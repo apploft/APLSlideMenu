@@ -20,6 +20,7 @@ extern NSString *APLSlideMenuDidShowNotification;
 extern NSString *APLSlideMenuWillHideNotification;
 extern NSString *APLSlideMenuDidHideNotification;
 
+
 @protocol APLSlideMenuViewControllerDelegate<NSObject>
 @optional
 -(void) willShowMenu:(APLSlideMenuViewController *)aViewController;
@@ -27,6 +28,7 @@ extern NSString *APLSlideMenuDidHideNotification;
 -(void) willHideMenu:(APLSlideMenuViewController *)aViewController;
 -(void) didHideMenu:(APLSlideMenuViewController *)aViewController;
 @end
+
 
 /* To be implemented by any view controller who wants to influence 
    the gesture support for the slide menu when it's visible.
@@ -36,7 +38,10 @@ extern NSString *APLSlideMenuDidHideNotification;
 -(APLSlideMenuGestureSupportType)gestureSupport;
 @end
 
+
 @interface APLSlideMenuViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet UIViewController *menuViewController __attribute__ ((deprecated));
 @property (nonatomic, strong) IBOutlet UIViewController *leftMenuViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *rightMenuViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *contentViewController;
@@ -78,14 +83,17 @@ extern NSString *APLSlideMenuDidHideNotification;
 /** Readonly getter. */
 - (BOOL) isMenuViewVisible;
 
+- (void) showMenu:(BOOL)animated __attribute__ ((deprecated));
 - (void) showLeftMenu:(BOOL)animated;
 - (void) showRightMenu:(BOOL)animated;
 - (void) hideMenu:(BOOL)animated;
 
+- (void) switchMenu:(BOOL)animated __attribute__ ((deprecated));
 - (void) switchLeftMenu:(BOOL) animated;
 - (void) switchRightMenu:(BOOL) animated;
 
 - (void) dismissContentViewController;
+
 @end
 
 //----------------------------------------------

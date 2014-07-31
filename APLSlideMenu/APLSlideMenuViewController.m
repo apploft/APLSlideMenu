@@ -218,6 +218,14 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     [self setContentViewController:contentViewController animated:NO];
 }
 
+- (void)setMenuViewController:(UIViewController *)menuViewController {
+    [self setLeftMenuViewController:menuViewController];
+}
+
+- (UIViewController *)menuViewController {
+    return self.leftMenuViewController;
+}
+
 - (void)setLeftMenuViewController:(UIViewController *)menuViewController {
     
     if (_leftMenuViewController) {
@@ -522,6 +530,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
      [[NSNotificationCenter defaultCenter] postNotificationName:APLSlideMenuDidHideNotification object:self];
 }
 
+- (void)showMenu:(BOOL)animated {
+    [self showLeftMenu:animated];
+}
+
 - (void)showLeftMenu:(BOOL)animated {
     [self.view sendSubviewToBack:self.rightMenuViewController.view];
     [self showMenu:self.leftMenuViewController animated:animated];
@@ -664,6 +676,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
         hideMenuBlock();
         hideMenuCompletionBlock(YES);
     }
+}
+
+- (void)switchMenu:(BOOL)animated {
+    [self switchLeftMenu:animated];
 }
 
 -(void) switchLeftMenu:(BOOL) animated {
