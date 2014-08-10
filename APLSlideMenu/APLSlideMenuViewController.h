@@ -9,7 +9,8 @@
 typedef NS_ENUM(NSInteger,APLSlideMenuGestureSupportType) {
     APLSlideMenuGestureSupportNone = 0,
     APLSlideMenuGestureSupportBasic,
-    APLSlideMenuGestureSupportDrag
+    APLSlideMenuGestureSupportDrag,
+    APLSlideMenuGestureSupportDragOnlyNavigationBar
 };
 
 @class APLSlideMenuViewController;

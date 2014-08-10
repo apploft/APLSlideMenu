@@ -37,6 +37,8 @@
     if (index == 0) {
         support = APLSlideMenuGestureSupportDrag;
     } else if (index == 1) {
+        support = APLSlideMenuGestureSupportDragOnlyNavigationBar;
+    } else if (index == 2) {
         support = APLSlideMenuGestureSupportBasic;
     }
     self.slideMenuController.gestureSupport = support;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Slide Menu View Controller-->
@@ -19,7 +19,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="T0f-c6-agC" kind="custom" identifier="content" customClass="APLSlideMenuContentSegue" id="Pbm-Dr-fUx"/>
+                        <segue destination="vrm-SZ-mgN" kind="custom" identifier="content" customClass="APLSlideMenuContentSegue" id="Pbm-Dr-fUx"/>
                         <segue destination="eky-b4-jCJ" kind="custom" identifier="leftMenu" customClass="APLSlideMenuLeftMenuSegue" id="k8T-hu-4g8"/>
                         <segue destination="bEv-Mi-WfJ" kind="custom" identifier="rightMenu" customClass="APLSlideMenuRightMenuSegue" id="EsJ-2L-EBu"/>
                     </connections>
@@ -78,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LZ-KY-lnT">
-                                <rect key="frame" x="85" y="40" width="150" height="40"/>
+                                <rect key="frame" x="85" y="84" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="CAf-uc-vmV"/>
                                     <constraint firstAttribute="width" constant="150" id="Q13-bu-Jiz"/>
@@ -91,7 +91,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wY-cj-GjR">
-                                <rect key="frame" x="85" y="80" width="150" height="40"/>
+                                <rect key="frame" x="85" y="124" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2R0-xO-URC"/>
                                     <constraint firstAttribute="width" constant="150" id="RZK-T7-1A7"/>
@@ -104,12 +104,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4B-zi-50b">
+                                <rect key="frame" x="80" y="-80" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="or use a slide gesture" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="ueb-xW-IHp">
-                                <rect key="frame" x="60" y="124" width="200" height="30"/>
+                                <rect key="frame" x="60" y="168" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="3Vi-tb-Cgs"/>
                                     <constraint firstAttribute="height" constant="30" id="Jcq-Nz-WpR"/>
@@ -119,13 +120,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Nc0-H6-28O">
-                                <rect key="frame" x="57" y="205" width="206" height="29"/>
+                                <rect key="frame" x="10" y="249" width="300" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="0ka-RE-vug"/>
-                                    <constraint firstAttribute="width" constant="206" id="5w1-0h-9hA"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="5w1-0h-9hA"/>
                                 </constraints>
                                 <segments>
                                     <segment title="Drag"/>
+                                    <segment title="NavBarOnly"/>
                                     <segment title="Basic"/>
                                     <segment title="None"/>
                                 </segments>
@@ -134,7 +136,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="gesture support:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGQ-KF-kra">
-                                <rect key="frame" x="0.0" y="174" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="218" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Exf-Bj-cGH"/>
                                     <constraint firstAttribute="width" constant="320" id="oip-Gb-Erc"/>
@@ -144,7 +146,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISI-4x-41w">
-                                <rect key="frame" x="0.0" y="253" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="297" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="MVs-KL-Hdk"/>
                                     <constraint firstAttribute="height" constant="40" id="fbL-6U-iq0"/>
@@ -158,7 +160,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDd-cB-kJF">
-                                <rect key="frame" x="0.0" y="293" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="337" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="V6h-fj-OAm"/>
                                     <constraint firstAttribute="width" constant="320" id="sIK-kt-kZ1"/>
@@ -191,10 +193,11 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="gvr-2k-aa8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovD-NG-bOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456" y="29"/>
+            <point key="canvasLocation" x="891" y="29"/>
         </scene>
         <!--Right Menu View Controller-->
         <scene sceneID="gGN-kD-96i">
@@ -233,13 +236,28 @@
             </objects>
             <point key="canvasLocation" x="456" y="713"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="g5L-mh-Hez">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vrm-SZ-mgN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u3I-Rr-zpG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T0f-c6-agC" kind="relationship" relationship="rootViewController" id="b1w-wN-bKX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rs-Uj-tBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="29"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

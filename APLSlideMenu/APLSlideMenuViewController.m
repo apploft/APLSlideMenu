@@ -4,6 +4,23 @@
 
 #import "APLSlideMenuViewController.h"
 
+@implementation UIView(APLSlideMenuViewController)
+
+- (UIView *)APLSlideMenuViewController_findSubviewOfClass:(Class)class
+{
+    if ([self isKindOfClass:class])
+        return self;
+    for (UIView *view in self.subviews)
+    {
+        UIView *foundSubview = [view APLSlideMenuViewController_findSubviewOfClass:class];
+        if (foundSubview)
+            return foundSubview;
+    }
+    return 0;
+}
+
+@end
+
 NSString *APLSlideMenuWillShowNotification = @"APLSlideMenuWillShowNotificationInternal";
 NSString *APLSlideMenuDidShowNotification = @"APLSlideMenuDidShowNotificationInternal";
 NSString *APLSlideMenuWillHideNotification = @"APLSlideMenuWillHideNotificationInternal";
@@ -419,6 +436,21 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - MenuHandling
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.isMenuViewVisible)
+        return YES;
+    if (self.gestureSupport == APLSlideMenuGestureSupportNone)
+        return NO;
+    if (self.gestureSupport == APLSlideMenuGestureSupportDragOnlyNavigationBar)
+    {
+        UIView *navigationBar = [self.contentContainerView APLSlideMenuViewController_findSubviewOfClass:[UINavigationBar class]];
+        if (!CGRectContainsPoint(navigationBar.bounds, [gestureRecognizer locationInView:navigationBar]))
+            return NO;
+    }
+    return YES;
+}
+
 - (void) dragGestureRecognizerDrag:(UIPanGestureRecognizer*)sender {
     if (self.keyboardVisible || self.isDisplayMenuSideBySide)
         return;
@@ -434,7 +466,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            if (self.gestureSupport == APLSlideMenuGestureSupportDrag) {
+            if (self.gestureSupport == APLSlideMenuGestureSupportDrag ||
+                self.gestureSupport == APLSlideMenuGestureSupportDragOnlyNavigationBar) {
                 UIView *aView       = self.contentContainerView;
                 CGRect contentFrame = aView.frame;
                 
@@ -471,7 +504,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
                         [self hideMenu:YES];
                     }
                 }
-            } else if (self.gestureSupport == APLSlideMenuGestureSupportDrag) {
+            } else if (self.gestureSupport == APLSlideMenuGestureSupportDrag ||
+                       self.gestureSupport == APLSlideMenuGestureSupportDragOnlyNavigationBar) {
                 UIView *aView = self.contentContainerView;
                 CGRect contentFrame = [aView frame];
                 CGFloat currentX    = contentFrame.origin.x;
