@@ -106,6 +106,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     panGR.minimumNumberOfTouches = 1;
     panGR.maximumNumberOfTouches = 1;
     self.dragGestureRecognizer = panGR;
+    self.dragGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:panGR];
     
     UIView *contentContainer = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -745,9 +746,18 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     
     // prevent recognizing touches on the slider
-    if ([touch.view isKindOfClass:[UISlider class]]) {
-        return NO;
+    UIView *view = touch.view;
+    while (view) {
+        if ([view isKindOfClass:[UISlider class]] || [view isKindOfClass:[UISwitch class]])
+            return NO;
+        view = view.superview;
     }
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (gestureRecognizer == self.dragGestureRecognizer && [otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")])
+        return NO;
     return YES;
 }
 
