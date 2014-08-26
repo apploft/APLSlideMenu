@@ -106,7 +106,6 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     panGR.minimumNumberOfTouches = 1;
     panGR.maximumNumberOfTouches = 1;
     self.dragGestureRecognizer = panGR;
-    self.dragGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:panGR];
     
     UIView *contentContainer = [[UIView alloc] initWithFrame:self.view.bounds];

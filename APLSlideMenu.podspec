@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "APLSlideMenu"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Sliding Hamburger Menu like the one in the Facebook App"
 
   s.description  = <<-DESC
