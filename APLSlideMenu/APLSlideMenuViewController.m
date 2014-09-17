@@ -432,21 +432,6 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - MenuHandling
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    if (self.isMenuViewVisible)
-        return YES;
-    if (self.gestureSupport == APLSlideMenuGestureSupportNone)
-        return NO;
-    if (self.gestureSupport == APLSlideMenuGestureSupportDragOnlyNavigationBar)
-    {
-        UIView *navigationBar = [self.contentContainerView APLSlideMenuViewController_findSubviewOfClass:[UINavigationBar class]];
-        if (!CGRectContainsPoint(navigationBar.bounds, [gestureRecognizer locationInView:navigationBar]))
-            return NO;
-    }
-    return YES;
-}
-
 - (void) dragGestureRecognizerDrag:(UIPanGestureRecognizer*)sender {
     if (self.keyboardVisible || self.isDisplayMenuSideBySide)
         return;
@@ -738,6 +723,21 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - UIGestureRecognizerDelegate
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.isMenuViewVisible) {
+        return YES;
+    }
+    if (self.gestureSupport == APLSlideMenuGestureSupportNone) {
+        return NO;
+    }
+    if (self.gestureSupport == APLSlideMenuGestureSupportDragOnlyNavigationBar) {
+        UIView *navigationBar = [self.contentContainerView APLSlideMenuViewController_findSubviewOfClass:[UINavigationBar class]];
+        if (!CGRectContainsPoint(navigationBar.bounds, [gestureRecognizer locationInView:navigationBar]))
+            return NO;
+    }
+    return YES;
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     
     // prevent recognizing touches on the slider
@@ -751,9 +751,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if (gestureRecognizer == self.dragGestureRecognizer && [otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")])
-        return NO;
-    return YES;
+    return (gestureRecognizer != self.dragGestureRecognizer) || ![otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
 }
 
 - (IBAction)closeTapGestureRecognizerFired:(UIGestureRecognizer*)sender {
