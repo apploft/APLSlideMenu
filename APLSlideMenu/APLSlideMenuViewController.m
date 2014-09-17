@@ -408,18 +408,14 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     // hack to trigger rotation to supported orientation in case this is not the topViewController
     if (([[navigationController viewControllers] count] < 2) || ([navigationController respondsToSelector:@selector(supportedInterfaceOrientations)] && ([navigationController supportedInterfaceOrientations] == UIInterfaceOrientationMaskAll))) return;
     
-    [self presentViewController:[UIViewController new] animated:NO completion:^{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        if (![self respondsToSelector:@selector(leftLayoutGuide)]) {
+    if (![self respondsToSelector:@selector(presentationController)]) {
 #pragma clang diagnostic pop
+        [self presentViewController:[UIViewController new] animated:NO completion:^{
             [self dismissViewControllerAnimated:NO completion:nil];
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self dismissViewControllerAnimated:NO completion:nil];
-            });
-        }
-    }];
+        }];
+    }
 }
 
 #pragma mark - Screen setup
