@@ -35,7 +35,7 @@ When testing with your simulator instead of a device, you need to deactivate thi
 
 Import header file:
 
-	#import "APLSlideMenu.h"
+	#import "APLSlideMenuViewController.h"
 	
 Initialization example:
 	
