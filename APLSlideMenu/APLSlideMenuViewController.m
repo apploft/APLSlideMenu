@@ -356,7 +356,10 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     contentViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     CGRect currentFrame     = self.view.bounds;
-    currentFrame.origin.x   = currentFrame.size.width;
+    if(self.activeMenuViewController == self.rightMenuViewController)
+        currentFrame.origin.x   = -currentFrame.size.width;
+    else
+        currentFrame.origin.x   = currentFrame.size.width;
     self.contentContainerView.frame = currentFrame;
     [self.contentContainerView insertSubview:contentViewController.view atIndex:0];
     
