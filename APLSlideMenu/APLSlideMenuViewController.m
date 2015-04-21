@@ -475,14 +475,20 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
             break;
         }
         case UIGestureRecognizerStateEnded: {            
-            if (self.gestureSupport == APLSlideMenuGestureSupportBasic) {
-                if (xTranslation > 0.0) {
+            if (self.gestureSupport == APLSlideMenuGestureSupportBasic ||
+                self.gestureSupport == APLSlideMenuGestureSupportBasicOnlyHorizontal) {
+
+                BOOL hasCorrectAngle = YES;
+                if (self.gestureSupport == APLSlideMenuGestureSupportBasicOnlyHorizontal) {
+                    hasCorrectAngle = ABS(translation.x) > ABS(translation.y);
+                }
+                if (xTranslation > 0.0 && hasCorrectAngle) {
                     if (self.leftMenuViewController && !self.isMenuViewVisible) {
                         [self showLeftMenu:YES];
                     } else {
                         [self hideMenu:YES];
                     }
-                } else if (xTranslation < 0.0) {
+                } else if (xTranslation < 0.0 && hasCorrectAngle) {
                     if (self.rightMenuViewController && !self.isMenuViewVisible) {
                         [self showRightMenu:YES];
                     } else {
