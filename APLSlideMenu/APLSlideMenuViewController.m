@@ -480,8 +480,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
                 BOOL hasCorrectAngle = YES;
                 if (self.gestureSupport == APLSlideMenuGestureSupportBasicOnlyHorizontal) {
-                    CGFloat angle = ABS(atan2(translation.y, translation.x));
-                    hasCorrectAngle = angle < M_PI_4 || angle > 3 * M_PI_4;
+                    hasCorrectAngle = ABS(translation.x) > ABS(translation.y);
                 }
                 if (xTranslation > 0.0 && hasCorrectAngle) {
                     if (self.leftMenuViewController && !self.isMenuViewVisible) {
