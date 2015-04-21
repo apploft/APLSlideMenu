@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "APLSlideMenu"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "Sliding Hamburger Menu like the one in the Facebook App"
 
   s.description  = <<-DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   
-  s.author       = 'Christopher Groß', 'Tobias Conradi', 'Tino Rachui', 'Michael Kamphausen', 'Thorsten Siebenborn'
+  s.author       = 'Christopher Groß', 'Tobias Conradi', 'Tino Rachui', 'Michael Kamphausen', 'Thorsten Siebenborn', 'Kay J.', 'Ivan Ziryanov', 'Emmanuel Castellani', 'Nico Schümann'
 
   s.platform     = :ios, '5.0'
 
