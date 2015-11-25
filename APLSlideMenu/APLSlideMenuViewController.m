@@ -38,6 +38,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 @property (nonatomic, strong) UIGestureRecognizer *dragGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *hideTapGestureRecognizer;
 @property (nonatomic, assign) CGFloat dragContentStartX;
+@property (nonatomic, assign) CGPoint dragGestureStartPoint;
 @property (nonatomic, assign) BOOL keyboardVisible;
 @property (nonatomic, assign, getter = isMenuViewVisible) BOOL menuViewVisible;
 @property (nonatomic, assign) UIView *contentContainerView;
@@ -436,6 +437,13 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
 
 #pragma mark - MenuHandling
 
+- (BOOL)delegateVetosDragWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint inOrderToShowMenu:(BOOL)isGoingToShowMenuWhenThisGestureSucceeds {
+    if ([self.slideDelegate respondsToSelector:@selector(shouldHandleSlideMenuGesture:startingAtPoint:withEndPoint:inOrderToShowMenu:)]) {
+        return ![self.slideDelegate shouldHandleSlideMenuGesture:self startingAtPoint:startPoint withEndPoint:endPoint inOrderToShowMenu:isGoingToShowMenuWhenThisGestureSucceeds];
+    }
+    return NO;
+}
+
 - (void) dragGestureRecognizerDrag:(UIPanGestureRecognizer*)sender {
     if (self.keyboardVisible || self.isDisplayMenuSideBySide)
         return;
@@ -448,6 +456,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     switch (state) {
         case UIGestureRecognizerStateBegan: {
             self.dragContentStartX = self.contentContainerView.frame.origin.x;
+            self.dragGestureStartPoint = [sender locationInView:self.view];
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -469,30 +478,44 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
                     [self.view sendSubviewToBack:self.rightMenuViewController.view];
                 }
                 
-                contentFrame.origin.x = newStartX;                
+                contentFrame.origin.x = newStartX;
                 aView.frame = contentFrame;
             }
             break;
         }
-        case UIGestureRecognizerStateEnded: {            
+        case UIGestureRecognizerStateEnded: {
             if (self.gestureSupport == APLSlideMenuGestureSupportBasic ||
                 self.gestureSupport == APLSlideMenuGestureSupportBasicOnlyHorizontal) {
-
+                
                 BOOL hasCorrectAngle = YES;
                 if (self.gestureSupport == APLSlideMenuGestureSupportBasicOnlyHorizontal) {
                     hasCorrectAngle = ABS(translation.x) > ABS(translation.y);
                 }
+                
+                CGPoint endPoint = [sender locationInView:self.view];
+                /*
+                 * Spaghetti code ahead. Grab yourself some tomatoe sauce and enjoy.
+                 * Yes, there are these many different cases.
+                 */
                 if (xTranslation > 0.0 && hasCorrectAngle) {
                     if (self.leftMenuViewController && !self.isMenuViewVisible) {
-                        [self showLeftMenu:YES];
+                        if (![self delegateVetosDragWithStartPoint:self.dragGestureStartPoint endPoint:endPoint inOrderToShowMenu:YES]) {
+                            [self showLeftMenu:YES];
+                        }
                     } else {
-                        [self hideMenu:YES];
+                        if (![self delegateVetosDragWithStartPoint:self.dragGestureStartPoint endPoint:endPoint inOrderToShowMenu:NO]) {
+                            [self hideMenu:YES];
+                        }
                     }
                 } else if (xTranslation < 0.0 && hasCorrectAngle) {
                     if (self.rightMenuViewController && !self.isMenuViewVisible) {
-                        [self showRightMenu:YES];
+                        if (![self delegateVetosDragWithStartPoint:self.dragGestureStartPoint endPoint:endPoint inOrderToShowMenu:YES]) {
+                            [self showRightMenu:YES];
+                        }
                     } else {
-                        [self hideMenu:YES];
+                        if (![self delegateVetosDragWithStartPoint:self.dragGestureStartPoint endPoint:endPoint inOrderToShowMenu:NO]) {
+                            [self hideMenu:YES];
+                        }
                     }
                 }
             } else if (self.gestureSupport == APLSlideMenuGestureSupportDrag ||
@@ -530,8 +553,9 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
             }
             // Reset drag content start x
             self.dragContentStartX = 0.0;
+            self.dragGestureStartPoint = CGPointZero;
             break;
-        }            
+        }
         default:
             break;
     }

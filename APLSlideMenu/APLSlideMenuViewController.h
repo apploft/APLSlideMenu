@@ -25,6 +25,7 @@ extern NSString *APLSlideMenuDidHideNotification;
 
 @protocol APLSlideMenuViewControllerDelegate<NSObject>
 @optional
+-(BOOL) shouldHandleSlideMenuGesture:(APLSlideMenuViewController *)aViewController startingAtPoint:(CGPoint)startPoint withEndPoint:(CGPoint)endPoint inOrderToShowMenu:(BOOL)isGoingToShowMenuWhenThisGestureSucceeds;
 -(void) willShowMenu:(APLSlideMenuViewController *)aViewController;
 -(void) didShowMenu:(APLSlideMenuViewController *)aViewController;
 -(void) willHideMenu:(APLSlideMenuViewController *)aViewController;
