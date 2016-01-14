@@ -315,7 +315,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     
     if (self.rightMenuViewController) {
         CGRect menuFrame = self.rightMenuViewController.view.frame;
-        menuFrame.size.width = self.menuAbsoluteWidth + kAPLSlideMenuFirstOffset;
+        menuFrame.size.width = self.menuAbsoluteWidth;
+        menuFrame.origin.x = self.view.bounds.size.width - menuFrame.size.width;
         self.rightMenuViewController.view.frame = menuFrame;
     }
 }
