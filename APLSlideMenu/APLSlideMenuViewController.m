@@ -603,8 +603,8 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
     
     void(^showMenuCompletionBlock)(BOOL) = ^(BOOL finished) {
-        self.menuViewVisible = YES;
         self.activeMenuViewController = viewController;
+        self.menuViewVisible = YES;
         if (self.tapOnContentViewToHideMenu) {
             [self.contentContainerView addGestureRecognizer:self.hideTapGestureRecognizer];
             self.contentViewController.view.userInteractionEnabled = NO;
