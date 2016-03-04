@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   
   s.author       = 'Christopher Groß', 'Tobias Conradi', 'Tino Rachui', 'Michael Kamphausen', 'Thorsten Siebenborn', 'Kay J.', 'Ivan Ziryanov', 'Emmanuel Castellani', 'Nico Schümann'
 
-  s.platform     = :ios, '5.0'
+  s.platform     = :ios, '6.0'
 
   s.source       = { :git => "https://github.com/apploft/APLSlideMenu.git", :tag => s.version.to_s }
 

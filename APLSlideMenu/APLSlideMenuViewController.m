@@ -171,7 +171,7 @@ static CGFloat kAPLSlideMenuFirstOffset = 4.0;
     return (self.contentViewController != nil) ? [[self getTopContentViewController] shouldAutorotate] : YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return (self.contentViewController != nil) ? [[self getTopContentViewController] supportedInterfaceOrientations] : UIInterfaceOrientationMaskAll;
 }
 

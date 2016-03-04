@@ -47,9 +47,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.currentIndexPath = indexPath;
-    id contentViewController = self.slideMenuController.contentViewController;
+    UINavigationController* navigationController = (UINavigationController*)self.slideMenuController.contentViewController;
+    APLViewController* contentViewController = navigationController.viewControllers.firstObject;
     if ([contentViewController isKindOfClass:[APLViewController class]]) {
-        [(APLViewController*) contentViewController textLabel].text = [NSString stringWithFormat:@"Content %ld",(long)indexPath.row];
+        [contentViewController textLabel].text = [NSString stringWithFormat:@"Content %ld",(long)indexPath.row];
         [self.slideMenuController hideMenu:YES];
     }
 }
