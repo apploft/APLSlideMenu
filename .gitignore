@@ -16,5 +16,5 @@ profile
 fastlane/report.xml
 Pods/
 Podfile.lock
-
 .DS_Store
+Carthage/
