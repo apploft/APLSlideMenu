@@ -16,13 +16,44 @@
 		B3FCC41D183A1BA6005BF9D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC41C183A1BA6005BF9D9 /* main.m */; };
 		B3FCC42C183A1C79005BF9D9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FCC42A183A1C79005BF9D9 /* MainStoryboard.storyboard */; };
 		B3FCC434183A2480005BF9D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3FCC432183A2480005BF9D9 /* InfoPlist.strings */; };
-		B3FCC441183A2509005BF9D9 /* APLSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */; };
-		B6A281FE18EEB2B200926904 /* APLSlideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */; };
+		D0056C031D724D1A00E029E4 /* APLSlideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0056C001D724CFB00E029E4 /* APLSlideMenu.framework */; };
+		D0056C041D724D1A00E029E4 /* APLSlideMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0056C001D724CFB00E029E4 /* APLSlideMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD88AE3116809C51000412E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3016809C51000412E1 /* UIKit.framework */; };
 		DD88AE3316809C51000412E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3216809C51000412E1 /* Foundation.framework */; };
 		DD88AE3516809C51000412E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE3416809C51000412E1 /* CoreGraphics.framework */; };
 		DD88AE5716809E2A000412E1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88AE5616809E2A000412E1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D0056BFF1D724CFB00E029E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0056BFB1D724CFB00E029E4 /* APLSlideMenu.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D02C20A81D7248500012812D;
+			remoteInfo = APLSlideMenu;
+		};
+		D0056C051D724D1A00E029E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0056BFB1D724CFB00E029E4 /* APLSlideMenu.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D02C20A71D7248500012812D;
+			remoteInfo = APLSlideMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D02C20C51D7249BB0012812D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0056C041D724D1A00E029E4 /* APLSlideMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B3FCC40A183A1B35005BF9D9 /* APLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APLAppDelegate.h; path = APLSlideMenuDemo/APLAppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -39,10 +70,7 @@
 		B3FCC41E183A1BB2005BF9D9 /* APLSlideMenuDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "APLSlideMenuDemo-Prefix.pch"; path = "APLSlideMenuDemo/APLSlideMenuDemo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		B3FCC42B183A1C79005BF9D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = APLSlideMenuDemo/en.lproj/MainStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		B3FCC433183A2480005BF9D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = APLSlideMenuDemo/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		B3FCC43F183A2509005BF9D9 /* APLSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSlideMenuViewController.h; sourceTree = "<group>"; };
-		B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSlideMenuViewController.m; sourceTree = "<group>"; };
-		B6A281FC18EEB2B200926904 /* APLSlideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSlideMenuSegue.h; sourceTree = "<group>"; };
-		B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSlideMenuSegue.m; sourceTree = "<group>"; };
+		D0056BFB1D724CFB00E029E4 /* APLSlideMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = APLSlideMenu.xcodeproj; path = ../APLSlideMenu.xcodeproj; sourceTree = "<group>"; };
 		DD88AE2D16809C51000412E1 /* APLSlideMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APLSlideMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD88AE3016809C51000412E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DD88AE3216809C51000412E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0056C031D724D1A00E029E4 /* APLSlideMenu.framework in Frameworks */,
 				DD88AE5716809E2A000412E1 /* QuartzCore.framework in Frameworks */,
 				DD88AE3116809C51000412E1 /* UIKit.framework in Frameworks */,
 				DD88AE3316809C51000412E1 /* Foundation.framework in Frameworks */,
@@ -72,21 +101,18 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
-		B3FCC43E183A2509005BF9D9 /* APLSlideMenu */ = {
+		D0056BFC1D724CFB00E029E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B3FCC43F183A2509005BF9D9 /* APLSlideMenuViewController.h */,
-				B3FCC440183A2509005BF9D9 /* APLSlideMenuViewController.m */,
-				B6A281FC18EEB2B200926904 /* APLSlideMenuSegue.h */,
-				B6A281FD18EEB2B200926904 /* APLSlideMenuSegue.m */,
+				D0056C001D724CFB00E029E4 /* APLSlideMenu.framework */,
 			);
-			name = APLSlideMenu;
-			path = ../APLSlideMenu;
-			sourceTree = SOURCE_ROOT;
+			name = Products;
+			sourceTree = "<group>";
 		};
 		DD88AE2416809C51000412E1 = {
 			isa = PBXGroup;
 			children = (
+				D0056BFB1D724CFB00E029E4 /* APLSlideMenu.xcodeproj */,
 				DD88AE3616809C51000412E1 /* APLSlideMenuDemo */,
 				DD88AE2F16809C51000412E1 /* Frameworks */,
 				DD88AE2E16809C51000412E1 /* Products */,
@@ -123,7 +149,6 @@
 				B3FCC40C183A1B35005BF9D9 /* APLMenuViewController.h */,
 				B3FCC40D183A1B35005BF9D9 /* APLMenuViewController.m */,
 				B3FCC42A183A1C79005BF9D9 /* MainStoryboard.storyboard */,
-				B3FCC43E183A2509005BF9D9 /* APLSlideMenu */,
 				DD88AE3716809C51000412E1 /* Supporting Files */,
 			);
 			name = APLSlideMenuDemo;
@@ -154,10 +179,12 @@
 				DD88AE2916809C51000412E1 /* Sources */,
 				DD88AE2A16809C51000412E1 /* Frameworks */,
 				DD88AE2B16809C51000412E1 /* Resources */,
+				D02C20C51D7249BB0012812D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D0056C061D724D1A00E029E4 /* PBXTargetDependency */,
 			);
 			name = APLSlideMenuDemo;
 			productName = ALSlideMenuDemo;
@@ -186,12 +213,28 @@
 			mainGroup = DD88AE2416809C51000412E1;
 			productRefGroup = DD88AE2E16809C51000412E1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D0056BFC1D724CFB00E029E4 /* Products */;
+					ProjectRef = D0056BFB1D724CFB00E029E4 /* APLSlideMenu.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				DD88AE2C16809C51000412E1 /* APLSlideMenuDemo */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D0056C001D724CFB00E029E4 /* APLSlideMenu.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = APLSlideMenu.framework;
+			remoteRef = D0056BFF1D724CFB00E029E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DD88AE2B16809C51000412E1 /* Resources */ = {
@@ -214,15 +257,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3FCC412183A1B35005BF9D9 /* APLViewController.m in Sources */,
-				B3FCC441183A2509005BF9D9 /* APLSlideMenuViewController.m in Sources */,
 				B3FCC410183A1B35005BF9D9 /* APLAppDelegate.m in Sources */,
 				B3FCC41D183A1BA6005BF9D9 /* main.m in Sources */,
 				B3FCC411183A1B35005BF9D9 /* APLMenuViewController.m in Sources */,
-				B6A281FE18EEB2B200926904 /* APLSlideMenuSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0056C061D724D1A00E029E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = APLSlideMenu;
+			targetProxy = D0056C051D724D1A00E029E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B3FCC42A183A1C79005BF9D9 /* MainStoryboard.storyboard */ = {
@@ -313,7 +362,8 @@
 					../APLSlideMenu,
 				);
 				INFOPLIST_FILE = "APLSlideMenuDemo/APLSlideMenuDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = APLSlideMenuDemo;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -331,7 +381,8 @@
 					../APLSlideMenu,
 				);
 				INFOPLIST_FILE = "APLSlideMenuDemo/APLSlideMenuDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = APLSlideMenuDemo;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

@@ -7,7 +7,7 @@
 //
 
 #import "APLAppDelegate.h"
-#import "APLSlideMenuViewController.h"
+#import <APLSlideMenu/APLSlideMenuViewController.h>
 
 @implementation APLAppDelegate
 

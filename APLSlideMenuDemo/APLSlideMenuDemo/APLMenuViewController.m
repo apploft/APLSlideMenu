@@ -7,7 +7,7 @@
 //
 
 #import "APLMenuViewController.h"
-#import "APLSlideMenuViewController.h"
+#import <APLSlideMenu/APLSlideMenuViewController.h>
 #import "APLViewController.h"
 
 @interface APLMenuViewController ()
